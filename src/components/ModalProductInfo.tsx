@@ -1,6 +1,7 @@
 import { Modal, Alert, ModalBody, Button } from "react-bootstrap";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import Product from "../models/Product";
+import { StateContext } from "../store/StateProvider";
 
 interface Props {
   isShowModalInfo: boolean;
@@ -15,6 +16,7 @@ const ModalProductInfo: FC<Props> = ({
   isShowModalInfo,
   convertToMoney,
 }) => {
+  const { state, dispatch } = useContext(StateContext);
   return (
     <Modal
       show={isShowModalInfo}
@@ -34,7 +36,13 @@ const ModalProductInfo: FC<Props> = ({
           </Alert>
           <p>Mô tả:</p>
           <p className="text-break">{product.description}</p>
-          <Button variant="danger" className="mt-auto">
+          <Button
+            variant="danger"
+            className="mt-auto"
+            onClick={function () {
+              dispatch({ type: "ADD_CART", payload: product });
+            }}
+          >
             Add to cart
           </Button>
         </div>

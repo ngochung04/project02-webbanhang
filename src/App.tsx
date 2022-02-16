@@ -1,4 +1,4 @@
-import { useState, FC, useEffect } from "react";
+import React, { useState, FC, useEffect, createContext } from "react";
 import Header from "./components/layout/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./components/layout/Footer";
@@ -6,6 +6,7 @@ import ListProducts from "./components/ListProducts";
 import axios from "axios";
 import Product from "./models/Product";
 import ModalProductInfo from "./components/ModalProductInfo";
+import Cart from "./components/Cart";
 import { StateProvider } from "./store/StateProvider";
 
 const App: FC = () => {
@@ -42,21 +43,24 @@ const App: FC = () => {
 
   return (
     <StateProvider>
-      <Header />
-      <ListProducts
-        products={products}
-        setProduct={setProduct}
-        convertToMoney={convertToMoney}
-        handleShowModalInfo={handleShowModalInfo}
-      />
+      <>
+        <Header />
+        <ListProducts
+          products={products}
+          setProduct={setProduct}
+          convertToMoney={convertToMoney}
+          handleShowModalInfo={handleShowModalInfo}
+        />
 
-      <ModalProductInfo
-        product={product}
-        isShowModalInfo={isShowModalInfo}
-        convertToMoney={convertToMoney}
-        handleCloseModalInfo={handleCloseModalInfo}
-      />
-      <Footer />
+        <ModalProductInfo
+          product={product}
+          isShowModalInfo={isShowModalInfo}
+          convertToMoney={convertToMoney}
+          handleCloseModalInfo={handleCloseModalInfo}
+        />
+        <Cart />
+        <Footer />
+      </>
     </StateProvider>
   );
 };

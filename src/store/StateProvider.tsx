@@ -1,15 +1,29 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, FC } from "react";
 import Product from "../models/Product";
 
-interface State {
-  products: Product[];
-  product: Product;
+interface Cart {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  image: string;
+  quantity: number;
 }
 
-type ActionType = { type: ""; payload: State };
+interface InitState {
+  products?: Product[];
+  carts?: Cart[];
+  product?: Product;
+}
 
-const initState: State = {
+type ActionType = {
+  type: "ADD_CART" | "REMOVE_CART" | "CHANGE_QUANTITY";
+  payload: Product;
+};
+
+const initState: InitState = {
   products: [],
+  carts: [],
   product: {
     id: 0,
     name: "",
@@ -19,22 +33,52 @@ const initState: State = {
   },
 };
 
-function reducer(state: State, action: ActionType) {
+// REDUCER
+function reducer(state: InitState, action: ActionType) {
   switch (action.type) {
-    case "":
-      return {};
+    case "ADD_CART":
+      const addCarts = state.carts ?? [];
+      if (addCarts.find((cart) => cart.id === action.payload.id)) {
+        const index = addCarts.findIndex(
+          (cart) => cart.id === action.payload.id
+        );
+        addCarts[index].quantity += 1;
+        return {
+          ...state,
+          carts: addCarts,
+        };
+      }
+      return {
+        ...state,
+        carts: [
+          ...(state.carts ?? []),
+          { ...action.payload, quantity: 1 },
+        ] as Cart[],
+      };
+
+    case "REMOVE_CART":
+      const cart = [...(state.carts ?? [])] as Cart[];
+      return {
+        ...state,
+        carts: cart.filter((product) =>
+          product.id !== action.payload.id ? product : null
+        ),
+      };
     default:
       return state;
   }
 }
 
-const StateContext = createContext({});
+export const StateContext = createContext<{
+  state: InitState;
+  dispatch: React.Dispatch<ActionType>;
+}>({ state: initState, dispatch: () => null });
 
-interface Props {
-  children: React.ReactNode;
-}
-
-export const StateProvider = ({ children }: Props) => {
+export const StateProvider: FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initState);
-  return <StateContext.Provider value={{}}>{children}</StateContext.Provider>;
+  return (
+    <StateContext.Provider value={{ state, dispatch }}>
+      {children}
+    </StateContext.Provider>
+  );
 };

@@ -29,7 +29,7 @@ const ListProducts: FC<Props> = ({
   return (
     <div className="row pt-5 m-3">
       {products.map((product) => (
-        <div className="col-2 mb-3">
+        <div className="col-2 mb-3" key={product.id}>
           <div className="card">
             <img src={product.image} className="rounded" alt="..." />
             <div className="card-body">
