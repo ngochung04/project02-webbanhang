@@ -1,5 +1,4 @@
 import { FC, Dispatch, SetStateAction } from "react";
-import { Placeholder, Spinner } from "react-bootstrap";
 import SkeletonProductCard from "./SkeletonProductCard";
 
 interface Product {
