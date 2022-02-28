@@ -16,7 +16,7 @@ const ModalProductInfo: FC<Props> = ({
   isShowModalInfo,
   convertToMoney,
 }) => {
-  const { state, dispatch } = useContext(StateContext);
+  const { dispatch } = useContext(StateContext);
   return (
     <Modal
       show={isShowModalInfo}

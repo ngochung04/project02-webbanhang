@@ -32,6 +32,7 @@ const Cart: FC = () => {
                                 src={product.image}
                                 className="img-sm"
                                 width={100}
+                                alt="..."
                               />
                             </div>
                             <div className="col-6 d-inline">{product.name}</div>
@@ -89,7 +90,7 @@ const Cart: FC = () => {
               </dl>
               <hr />
               <a
-                href="#"
+                href="#/"
                 className="btn btn-out btn-success btn-square btn-main mt-2"
               >
                 Continue Shopping

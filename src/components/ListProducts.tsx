@@ -1,4 +1,6 @@
 import { FC, Dispatch, SetStateAction } from "react";
+import { Placeholder, Spinner } from "react-bootstrap";
+import SkeletonProductCard from "./SkeletonProductCard";
 
 interface Product {
   id: number;
@@ -28,27 +30,38 @@ const ListProducts: FC<Props> = ({
 
   return (
     <div className="row pt-5 m-3">
-      {products.map((product) => (
-        <div className="col-2 mb-3" key={product.id}>
-          <div className="card">
-            <img src={product.image} className="rounded" alt="..." />
-            <div className="card-body">
-              <p className="card-title text-truncate">{product.name}</p>
-              <p className="text-right text-danger ">
-                {convertToMoney(product.price)}
-              </p>
-              <button
-                className="btn btn-danger"
-                onClick={function () {
-                  handleClick(product);
-                }}
-              >
-                Xem chi tiết
-              </button>
+      {products.length ? (
+        products.map((product) => (
+          <div className="col-2 mb-3" key={product.id}>
+            <div className="card">
+              <img src={product.image} className="rounded" alt="..." />
+              <div className="card-body">
+                <p className="card-title text-truncate">{product.name}</p>
+                <p className="text-right text-danger ">
+                  {convertToMoney(product.price)}
+                </p>
+                <button
+                  className="btn btn-danger"
+                  onClick={function () {
+                    handleClick(product);
+                  }}
+                >
+                  Xem chi tiết
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <>
+          <SkeletonProductCard />
+          <SkeletonProductCard />
+          <SkeletonProductCard />
+          <SkeletonProductCard />
+          <SkeletonProductCard />
+          <SkeletonProductCard />
+        </>
+      )}
     </div>
   );
 };

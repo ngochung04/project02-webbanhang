@@ -22,7 +22,7 @@ const App: FC = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/products")
+      .get("https://jsonblob.com/api/947776146922291200")
       .then((res) => setProducts(res.data));
   }, []);
 
