@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Cart from "../components/Cart";
 import ListProducts from "../components/ListProducts";
 import ModalProductInfo from "../components/ModalProductInfo";
 import Product from "../models/Product";
@@ -50,7 +49,6 @@ const HomePage = () => {
         convertToMoney={convertToMoney}
         handleCloseModalInfo={handleCloseModalInfo}
       />
-      <Cart />
     </>
   );
 };
