@@ -1,24 +1,24 @@
 import { useContext, useEffect, useState } from "react";
-import { StateContext } from "../../store/StateProvider";
+import { CartContext } from "../../store/CartProvider";
 
 const TotalCart = () => {
-  const { state } = useContext(StateContext);
-  const { carts } = state;
+  const { state } = useContext(CartContext);
+  const { products } = state;
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
     let total = 0;
-    carts?.map((cart) => {
-      return (total += cart.price * cart.quantity);
+    products?.map((product) => {
+      return (total += product.price * product.quantity);
     });
     setTotal(total);
-  }, [carts]);
+  }, [products]);
 
   const convertToMoney = (price: number) => {
     // console.log("render");
-    return price.toLocaleString("vi", {
+    return price.toLocaleString("en", {
       style: "currency",
-      currency: "VND",
+      currency: "USD",
     });
   };
   return (

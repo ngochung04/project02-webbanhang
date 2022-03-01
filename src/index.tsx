@@ -4,17 +4,20 @@ import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { StateProvider } from "./store/StateProvider";
+import { CartProvider } from "./store/CartProvider";
 import { BrowserRouter } from "react-router-dom";
+import { PostProvider } from "./store/PostProvider";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <StateProvider>
+  // <React.StrictMode>
+  <CartProvider>
+    <PostProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </StateProvider>
-  </React.StrictMode>,
+    </PostProvider>
+  </CartProvider>,
+  // </React.StrictMode>,
   document.getElementById("root")
 );
 

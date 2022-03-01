@@ -1,7 +1,7 @@
 import { Modal, Alert, ModalBody, Button } from "react-bootstrap";
 import { FC, useContext } from "react";
 import Product from "../models/Product";
-import { StateContext } from "../store/StateProvider";
+import { CartContext } from "../store/CartProvider";
 
 interface Props {
   isShowModalInfo: boolean;
@@ -16,7 +16,7 @@ const ModalProductInfo: FC<Props> = ({
   isShowModalInfo,
   convertToMoney,
 }) => {
-  const { dispatch } = useContext(StateContext);
+  const { dispatch } = useContext(CartContext);
   return (
     <Modal
       show={isShowModalInfo}
@@ -27,10 +27,15 @@ const ModalProductInfo: FC<Props> = ({
     >
       <ModalBody className="row">
         <div className="col-6">
-          <img src={product.image} alt="preview product" width={500} />
+          <img
+            src={product.image}
+            alt="preview product"
+            height="500px"
+            width="500px"
+          />
         </div>
         <div className="col-6 d-flex flex-column">
-          <h4>{product.name}</h4>
+          <h4>{product.title}</h4>
           <Alert variant="secondary" className="h3 text-danger">
             {convertToMoney(product.price)}
           </Alert>

@@ -1,4 +1,5 @@
-import Cart from "../components/Cart";
+import Cart from "../containers/Cart";
+
 const CartPage = () => {
   return <Cart />;
 };

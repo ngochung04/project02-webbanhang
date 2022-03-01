@@ -1,13 +1,6 @@
 import { FC, Dispatch, SetStateAction } from "react";
+import Product from "../models/Product";
 import SkeletonProductCard from "./SkeletonProductCard";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  description: string;
-}
 
 interface Props {
   products: Product[];
@@ -31,11 +24,19 @@ const ListProducts: FC<Props> = ({
     <div className="row pt-5 m-3">
       {products.length ? (
         products.map((product) => (
-          <div className="col-2 mb-3" key={product.id}>
+          <div
+            className="col-lg-3 col-md-4 col-sm-6 col-xl-2 mb-3"
+            key={product.id}
+          >
             <div className="card">
-              <img src={product.image} className="rounded" alt="..." />
+              <img
+                src={product.image}
+                height="200px"
+                className="rounded"
+                alt="..."
+              />
               <div className="card-body">
-                <p className="card-title text-truncate">{product.name}</p>
+                <p className="card-title text-truncate">{product.title}</p>
                 <p className="text-right text-danger ">
                   {convertToMoney(product.price)}
                 </p>

@@ -2,7 +2,7 @@ import * as React from "react";
 import { Route, Routes } from "react-router-dom";
 
 const Home = React.lazy(() => import("../pages/HomePage"));
-const Category = React.lazy(() => import("../pages/CategoryPage"));
+const ReviewPage = React.lazy(() => import("../pages/PostPage"));
 const Cart = React.lazy(() => import("../pages/CartPage"));
 
 const Router = () => {
@@ -10,7 +10,14 @@ const Router = () => {
     <React.Suspense fallback={null}>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/category" element={<Category />}></Route>
+        <Route path="/post" element={<ReviewPage />}>
+          <Route path="/post/:category" element={<ReviewPage />}>
+            <Route
+              path="/post/:category/:slug"
+              element={<ReviewPage />}
+            ></Route>
+          </Route>
+        </Route>
         <Route path="/cart" element={<Cart />}></Route>
       </Routes>
     </React.Suspense>

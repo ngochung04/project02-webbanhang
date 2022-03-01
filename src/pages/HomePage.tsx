@@ -8,23 +8,30 @@ const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [product, setProduct] = useState<Product>({
     id: 0,
-    name: "",
+    title: "",
     price: 0,
     image: "",
     description: "",
+    category: "",
+    quantity: 0,
   });
   const [isShowModalInfo, setIsShowModalInfo] = useState(false);
 
   useEffect(() => {
     axios
-      .get("https://jsonblob.com/api/947776146922291200")
+      .get("https://jsonblob.com/api/948153349182865408")
       .then((res) => setProducts(res.data));
   }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("https://jsonblob.com/api/947776146922291200")
+  //     .then((res) => setProducts(res.data));
+  // }, []);
 
   const convertToMoney = (price: number) => {
-    return price.toLocaleString("vi", {
+    return price.toLocaleString("en", {
       style: "currency",
-      currency: "VND",
+      currency: "USD",
     });
   };
 

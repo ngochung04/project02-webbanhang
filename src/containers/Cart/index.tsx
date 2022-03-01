@@ -1,11 +1,11 @@
 import { FC, useContext } from "react";
-import { StateContext } from "../../store/StateProvider";
-import ProductCart from "./ProductCart";
-import TotalCart from "./TotalCart";
+import ProductCart from "../../components/cart/ProductCart";
+import TotalCart from "../../components/cart/TotalCart";
+import { CartContext } from "../../store/CartProvider";
 
 const Cart: FC = () => {
-  const { state } = useContext(StateContext);
-  const { carts } = state;
+  const { state } = useContext(CartContext);
+  const { products } = state;
   return (
     <div className="container-fluid pt-5">
       <div className="row">
@@ -25,9 +25,9 @@ const Cart: FC = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {carts
-                    ? carts.map((product) => <ProductCart product={product} />)
-                    : null}
+                  {products?.map((product, index) => (
+                    <ProductCart product={product} key={index} />
+                  ))}
                 </tbody>
               </table>
             </div>
