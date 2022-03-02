@@ -1,11 +1,26 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Button } from "react-bootstrap";
+import AddReview from "../../components/post/AddReview";
+import ListReview from "../../components/post/ListReview";
 
 const Post = () => {
+  const [isAdd, setIsAdd] = useState(false);
+
+  const handleShowAddReview = () => {
+    setIsAdd(true);
+  };
+  const handleHideAddReview = () => {
+    setIsAdd(false);
+  };
   return (
-    <>
-      <Link to="">cateory</Link>
-    </>
+    <div className="container pt-5">
+      <Button variant="primary my-2" onClick={handleShowAddReview}>
+        Add review
+      </Button>
+      <AddReview isAdd={isAdd} onHide={handleHideAddReview} />
+      <ListReview />
+      {/* <Outlet /> */}
+    </div>
   );
 };
 

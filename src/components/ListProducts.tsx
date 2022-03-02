@@ -1,9 +1,9 @@
-import { FC, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Product from "../models/Product";
 import SkeletonProductCard from "./SkeletonProductCard";
 
 interface Props {
-  products: Product[];
+  products?: Product[];
   setProduct: Dispatch<SetStateAction<Product>>;
   convertToMoney: (price: number) => string;
   handleShowModalInfo: () => void;
@@ -22,7 +22,7 @@ const ListProducts = ({
 
   return (
     <div className="row pt-5 m-3">
-      {products.length ? (
+      {products && products.length ? (
         products.map((product) => (
           <div
             className="col-lg-3 col-md-4 col-sm-6 col-xl-2 mb-3"

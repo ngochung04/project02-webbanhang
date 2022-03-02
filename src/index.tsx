@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,16 +6,19 @@ import reportWebVitals from "./reportWebVitals";
 import { CartProvider } from "./store/CartProvider";
 import { BrowserRouter } from "react-router-dom";
 import { PostProvider } from "./store/PostProvider";
+import { ProductsProvider } from "./store/ProductsProvider";
 
 ReactDOM.render(
   // <React.StrictMode>
-  <CartProvider>
-    <PostProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </PostProvider>
-  </CartProvider>,
+  <ProductsProvider>
+    <CartProvider>
+      <PostProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </PostProvider>
+    </CartProvider>
+  </ProductsProvider>,
   // </React.StrictMode>,
   document.getElementById("root")
 );

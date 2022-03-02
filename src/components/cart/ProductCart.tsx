@@ -20,6 +20,7 @@ const ProductCart: FC<Props> = ({ product, handleDelete, handleChange }) => {
       <td>
         <input
           type="number"
+          min="0"
           className="form-control"
           value={product.quantity}
           onChange={handleChange(product)}

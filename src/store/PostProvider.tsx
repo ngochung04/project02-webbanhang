@@ -2,29 +2,35 @@ import { createContext, useReducer, FC } from "react";
 import Post from "../models/Post";
 
 interface InitState {
-  posts?: Post[];
-  post?: Post;
+  posts: Post[];
+  // post: Post;
 }
 
 type ActionType = {
-  type: "";
+  type: "ADD_POST";
   payload: Post;
 };
 
 const initState: InitState = {
   posts: [],
-  post: {
-    id: 0,
-    title: "",
-    category: "",
-    content: "",
-    tags: [],
-  },
+  // post: {
+  //   id: 0,
+  //   title: "",
+  //   category: "",
+  //   content: "",
+  //   tags: "",
+  // },
 };
 
 // REDUCER
 function reducer(state: InitState, action: ActionType) {
   switch (action.type) {
+    case "ADD_POST":
+      return {
+        ...state,
+        posts: [...state.posts, action.payload],
+      };
+
     default:
       return state;
   }
