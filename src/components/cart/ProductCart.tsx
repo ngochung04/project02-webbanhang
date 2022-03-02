@@ -1,26 +1,14 @@
-import React, { FC, useContext } from "react";
+import React, { FC, memo } from "react";
 import Product from "../../models/Product";
-import { CartContext } from "../../store/CartProvider";
 
 interface Props {
   product: Product;
+  handleDelete: (product: Product) => () => void;
+  handleChange: (
+    product: Product
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-const ProductCart: FC<Props> = ({ product }) => {
-  const { dispatch } = useContext(CartContext);
-  const handleDelete = (product: Product) => () => {
-    dispatch({
-      type: "REMOVE_CART",
-      payload: product,
-    });
-  };
-  const handleChange =
-    (product: Product) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      product.quantity = parseInt(e.target.value);
-      dispatch({
-        type: "CHANGE_QUANTITY_CART",
-        payload: product,
-      });
-    };
+const ProductCart: FC<Props> = ({ product, handleDelete, handleChange }) => {
   return (
     <tr key={product.id}>
       <td>
@@ -51,4 +39,4 @@ const ProductCart: FC<Props> = ({ product }) => {
   );
 };
 
-export default ProductCart;
+export default memo(ProductCart);

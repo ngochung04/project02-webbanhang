@@ -9,12 +9,12 @@ interface Props {
   handleShowModalInfo: () => void;
 }
 
-const ListProducts: FC<Props> = ({
+const ListProducts = ({
   products,
   setProduct,
   convertToMoney,
   handleShowModalInfo,
-}) => {
+}: Props) => {
   const handleClick = (product: Product) => {
     setProduct(product);
     handleShowModalInfo();

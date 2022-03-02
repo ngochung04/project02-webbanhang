@@ -1,11 +1,40 @@
-import { FC, useContext } from "react";
+import { FC, useCallback, useContext } from "react";
 import ProductCart from "../../components/cart/ProductCart";
 import TotalCart from "../../components/cart/TotalCart";
+import Product from "../../models/Product";
 import { CartContext } from "../../store/CartProvider";
 
 const Cart: FC = () => {
-  const { state } = useContext(CartContext);
+  const { state, dispatch } = useContext(CartContext);
   const { products } = state;
+
+  const handleDelete = useCallback(
+    (product: Product) => () => {
+      dispatch({
+        type: "REMOVE_CART",
+        payload: product,
+      });
+    },
+    [dispatch]
+  );
+
+  const handleChange = useCallback(
+    (product: Product) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      product.quantity = parseInt(e.target.value);
+      dispatch({
+        type: "CHANGE_QUANTITY_CART",
+        payload: product,
+      });
+    },
+    [dispatch]
+  );
+
+  const convertToMoney = useCallback((price: number) => {
+    return price.toLocaleString("en", {
+      style: "currency",
+      currency: "USD",
+    });
+  }, []);
   return (
     <div className="container-fluid pt-5">
       <div className="row">
@@ -26,14 +55,19 @@ const Cart: FC = () => {
                 </thead>
                 <tbody>
                   {products?.map((product, index) => (
-                    <ProductCart product={product} key={index} />
+                    <ProductCart
+                      product={product}
+                      handleDelete={handleDelete}
+                      handleChange={handleChange}
+                      key={index}
+                    />
                   ))}
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-        <TotalCart />
+        <TotalCart convertToMoney={convertToMoney} />
       </div>
     </div>
   );
