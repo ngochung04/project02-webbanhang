@@ -1,4 +1,4 @@
-import { FC, useContext, useState, memo, useMemo } from "react";
+import { FC, useContext, memo, useMemo } from "react";
 import { CartContext } from "../../store/CartProvider";
 interface Props {
   convertToMoney: (price: number) => string;
