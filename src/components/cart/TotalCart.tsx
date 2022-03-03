@@ -1,5 +1,7 @@
-import { FC, useContext, memo, useMemo } from "react";
+import { FC, useContext, memo, useMemo, useState } from "react";
 import { CartContext } from "../../store/CartProvider";
+import PromoCode from "./PromoCode";
+
 interface Props {
   convertToMoney: (price: number) => string;
 }
@@ -7,15 +9,38 @@ interface Props {
 const TotalCart: FC<Props> = ({ convertToMoney }) => {
   const { state } = useContext(CartContext);
   const { products } = state;
+  const [code, setCode] = useState({
+    code: "",
+    value: 0,
+    type: "",
+  });
 
   const totalPrice = useMemo(() => {
-    return convertToMoney(
+    return (
       products?.reduce((total, product) => {
         return total + product.price * product.quantity;
       }, 0) ?? 0
     );
-  }, [products, convertToMoney]);
+  }, [products]);
 
+  const discountPrice = useMemo(() => {
+    const price = () => {
+      if (code.type === "percent") {
+        return (totalPrice * code.value) / 100;
+      } else if (code.type === "money") {
+        return totalPrice - code.value < 0 ? totalPrice : code.value;
+      } else {
+        return 0;
+      }
+    };
+    return price();
+  }, [totalPrice, code]);
+
+  const finalPrice = useMemo(() => {
+    return totalPrice - discountPrice;
+  }, [totalPrice, discountPrice]);
+
+  
   return (
     <div className="col-lg-3">
       <div className="card">
@@ -27,15 +52,17 @@ const TotalCart: FC<Props> = ({ convertToMoney }) => {
           <dl className="dlist-align">
             <dt>Discount:</dt>
             <dd className="text-right text-danger ml-3">
-              - {convertToMoney(0)}
+              - {convertToMoney(discountPrice)}
             </dd>
           </dl>
           <dl className="dlist-align">
             <dt>Total:</dt>
             <dd className="text-right text-dark b ml-3">
-              <strong>{totalPrice}</strong>
+              <strong>{convertToMoney(finalPrice)}</strong>
             </dd>
           </dl>
+          <hr />
+          <PromoCode code={code} setCode={setCode} />
           <hr />
           <a
             href="#/"

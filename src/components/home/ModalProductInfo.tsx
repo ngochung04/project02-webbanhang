@@ -1,7 +1,7 @@
 import { Modal, Alert, ModalBody, Button } from "react-bootstrap";
 import { FC, useContext } from "react";
-import Product from "../models/Product";
-import { CartContext } from "../store/CartProvider";
+import Product from "../../models/Product";
+import { CartContext } from "../../store/CartProvider";
 
 interface Props {
   isShowModalInfo: boolean;

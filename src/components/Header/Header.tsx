@@ -29,10 +29,18 @@ const Header = () => {
             </NavLink>
 
             <NavLink
+              className="mx-2"
               to="/cart"
               style={{ color: "gray", textDecoration: "none" }}
             >
               Cart
+            </NavLink>
+            <NavLink
+              className="mx-2"
+              to="/code"
+              style={{ color: "gray", textDecoration: "none" }}
+            >
+              Promo Code
             </NavLink>
           </Nav>
         </Navbar.Collapse>

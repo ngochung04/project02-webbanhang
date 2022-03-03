@@ -7,18 +7,21 @@ import { CartProvider } from "./store/CartProvider";
 import { BrowserRouter } from "react-router-dom";
 import { PostProvider } from "./store/PostProvider";
 import { ProductsProvider } from "./store/ProductsProvider";
-
+import { Provider } from "react-redux";
+import store from "./redux/store";
 ReactDOM.render(
   // <React.StrictMode>
-  <ProductsProvider>
-    <CartProvider>
-      <PostProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </PostProvider>
-    </CartProvider>
-  </ProductsProvider>,
+  <Provider store={store}>
+    <ProductsProvider>
+      <CartProvider>
+        <PostProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </PostProvider>
+      </CartProvider>
+    </ProductsProvider>
+  </Provider>,
   // </React.StrictMode>,
   document.getElementById("root")
 );

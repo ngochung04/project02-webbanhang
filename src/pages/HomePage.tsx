@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import ListProducts from "../components/ListProducts";
-import ModalProductInfo from "../components/ModalProductInfo";
+import ListProducts from "../components/home/ListProducts";
+import ModalProductInfo from "../components/home/ModalProductInfo";
 import Product from "../models/Product";
 import { ProductsContext } from "../store/ProductsProvider";
 

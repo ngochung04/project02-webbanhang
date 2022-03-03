@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import Product from "../models/Product";
-import SkeletonProductCard from "./SkeletonProductCard";
-
+import Product from "../../models/Product";
+import SkeletonProductCard from "./SkeletonProductCard"
 interface Props {
   products?: Product[];
   setProduct: Dispatch<SetStateAction<Product>>;
